@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% block title %} Expressions {% endblock %}
+{% block body %}
+    {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+<h2>Sugeneruota išraiška</h2>
+<blockquote class="blockquote mt-3">
+  <p class="mb-0">{{ expression }}</p>
+    <footer class="blockquote-footer  pt-1">
+    {{ form_start(form) }}
+ {{ form_widget(form) }}
+ {{ form_end(form) }}
+    </footer>
+</blockquote>
+
+{% if expressions %}
+    <table id="expressions" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Išraiška</th>
+          <th>Peržiūra</th>
+        </tr>
+      </thead>
+      <tbody>
+ {% for expression in expressions %}
+  <tr>
+    <td>  {{expression.text}}</td>
+    <td><a href="/expression/{{ expression.id }}" class="btn btn-dark">Peržiūra</a></td>
+  </tr>
+ {% endfor %}
+    </tbody>
+    </table>
+  {% else %}
+    <p>Nėra išraškų</p>
+{% endif %}
+
+{% endblock %}
