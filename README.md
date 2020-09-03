@@ -1,6 +1,6 @@
 # Eneba Task
 
-> Demo url: https://secure-wave-65543.herokuapp.com
+> Demo url: https://eneba.herokuapp.com/
 
 ## Table of contents
 
