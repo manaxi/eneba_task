@@ -24,8 +24,9 @@ class ExpressionController extends AbstractController
   public function index(Request $request)
   {
     $this->faker = Factory::create();
-    $generatedExpression = $this->faker->realText(20);
-
+    $tempExpression = '{{{{och|oi|ai}} tu {{aukštielnika|skraidanti|greita|plaukianti|siautėjanti|žavingoji|liežuvinga|šmaikščioji}}, {{išverstake||žavioji}} {{rupūže|kate|karve|kukūže|krupe|rupena}}
+    |{{och tu}} {{aukštielnikas|beproti|svaiginantis|išbadėjas|šmaikštusis|liežuvingas|sąmojingas}}, {{iškleres|išvėpes|išverstakis||}} {{kurmi|šunie|buliau|raganiau|burtininke}}}}';
+    $generatedExpression =  $this->randomString($tempExpression);
     $expression = new Expression();
     $form = $this->createFormBuilder($expression)
       ->add('text', HiddenType::class, array(
@@ -58,7 +59,7 @@ class ExpressionController extends AbstractController
     |{{och tu}} {{aukštielnikas|beproti|svaiginantis|išbadėjas|šmaikštusis|liežuvingas|sąmojingas}}, {{iškleres|išvėpes|išverstakis||}} {{kurmi|šunie|buliau|raganiau|burtininke}}}}';
     $expressions = $this->getDoctrine()->getRepository(Expression::class)->findBy(['userAddr' => $request->getClientIp()]);
     return $this->render('expressions/index.html.twig', array(
-      'expression' => $this->randomString($expression),
+      'expression' => $generatedExpression,
       'form' => $form->createView(),
       'expressions' => $expressions,
     ));
